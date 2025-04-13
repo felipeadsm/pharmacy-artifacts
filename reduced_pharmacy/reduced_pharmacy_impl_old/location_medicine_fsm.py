@@ -1,10 +1,6 @@
 # coding=utf-8
 from transitions import Machine
 
-# When you need to generate FSM graphs, uncomment this line and comment the top line
-# from transitions.extensions import GraphMachine as Machine
-
-
 class LocationMedicineFSM:
     """
     Class responsible for controlling the states related to the location of the medicines

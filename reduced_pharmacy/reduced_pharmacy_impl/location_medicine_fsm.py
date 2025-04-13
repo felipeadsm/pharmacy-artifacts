@@ -1,9 +1,6 @@
 # coding=utf-8
 from transitions import Machine
 
-# When you need to generate FSM graphs, uncomment this line and comment the top line
-# from transitions.extensions import GraphMachine as Machine
-
 
 class LocationMedicineFSM:
     """
@@ -21,7 +18,6 @@ class LocationMedicineFSM:
         {'name': 'Finish', 'on_enter': ['current_state', 'localiza_finish']}
     ]
 
-    # Lógica de zerar a variável no after dos success e dos fail adicionada
     transitions = [
         {'trigger': 'initializing',         'source': 'Initial',           'dest': 'MoveToSection'},
 
@@ -50,20 +46,16 @@ class LocationMedicineFSM:
         Returns:
             The class object
         """
-        # Flag correspondente ao fim do processo de localização do medicamento
         self.finished = False
 
-        # Variáveis associada a contagem das tentativas de encontrar o marker
         self.attempts = 0
         self.limit_attempts = 2
 
-        # # Inicialização da máquina de estado
         self.machine = Machine(model=self,
                                states=LocationMedicineFSM.states,
                                transitions=LocationMedicineFSM.transitions,
                                initial='Initial')
 
-        # RoboChart variables
         self.move_to_section_var = None
         self.find_marker_var = None
         self.move_to_pos_ref_var = None
@@ -222,7 +214,6 @@ class LocationMedicineFSM:
                 method()
 
 if __name__ == '__main__':
-    # filter(lambda x: not (x.startswith('to_') or x.startswith('is_') or x.startswith('may_')), [method_name for method_name in dir(location_medicine_fsm) if callable(getattr(location_medicine_fsm, method_name))])
     location_medicine_fsm = LocationMedicineFSM()
 
     while location_medicine_fsm.state != 'Finish':
