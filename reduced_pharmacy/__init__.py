@@ -1,0 +1,4 @@
+# from reduced_pharmacy.reduced_pharmacy_impl.location_medicine_fsm import LocationMedicineFSM as ProcessMachine1
+from reduced_pharmacy.reduced_pharmacy_impl.location_medicine_fsm import LocationMedicineFSM as ProcessMachine
+# from reduced_pharmacy.reduced_pharmacy_impl_old.location_medicine_fsm_2 import LocationMedicineFSM as ProcessMachine
+

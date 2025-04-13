@@ -1,0 +1,27 @@
+[
+	{
+		"name": "untimed location_medicine::LocationMedicineFSM is deterministic (A1) [failures divergences model]",
+		"type": "deterministic",
+		"negated": false 
+	},
+	{
+		"name": "untimed location_medicine::LocationMedicineFSM is divergence free (A2) [failures divergences model]",
+		"type": "divergence-free",
+		"negated": false 
+	},
+	{
+		"name": "untimed location_medicine::LocationMedicineFSM is deadlock free (A3) [failures divergences model]",
+		"type": "deadlock-free",
+		"negated": false 
+	},
+	{
+		"name": "untimed location_medicine::LocationMedicineFSM terminates (T1)",
+		"type": "terminates",
+		"negated": false 
+	},
+	{
+		"name": "untimed target_refine refines location_medicine::LocationMedicineFSM (R1) [failures divergences model]",
+		"type": "refines",
+		"negated": false 
+	}
+]

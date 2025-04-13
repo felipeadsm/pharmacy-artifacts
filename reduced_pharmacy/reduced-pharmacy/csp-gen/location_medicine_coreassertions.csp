@@ -1,0 +1,30 @@
+
+--
+-- RoboChart generator version 3.0.0.202408051513
+-- Automatically generated on 14-01-2025 12:02:36
+--
+-- Iterated compression status: true
+-- Assertions compression status: false
+--
+
+include "location_medicine.csp"
+
+-- generate location_medicine_LocationMedicineFSM
+P_location_medicine_LocationMedicineFSM = let
+	id__ = 0
+	
+	
+	const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+	
+within
+	location_medicine::LocationMedicineFSM::O__(
+		id__,
+		const_location_medicine_LocationMedicineFSM_limit_attempts
+	)
+assert P_location_medicine_LocationMedicineFSM :[deadlock-free]	
+assert P_location_medicine_LocationMedicineFSM;RUN({r__}) :[deadlock-free]
+assert P_location_medicine_LocationMedicineFSM :[deterministic]
+assert P_location_medicine_LocationMedicineFSM :[divergence-free]
+
+
+

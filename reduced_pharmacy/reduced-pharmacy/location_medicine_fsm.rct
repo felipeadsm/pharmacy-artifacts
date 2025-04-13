@@ -1,0 +1,137 @@
+package location_medicine
+
+import definitions::*
+
+
+
+stm LocationMedicineFSM {
+	uses LocationMedicineEvents 
+	requires KinovaGen3LiteArmControl 
+	
+	final Finish
+	initial Initial
+	state MoveToSection {
+	}
+	state FindMarker {
+	}
+	state MoveToPosRef {
+	}
+	state ConfirmMarker {
+	}
+	state Fail {
+	entry attempts = 0
+	}
+	transition t0 {
+		from Initial
+		to MoveToSection
+	}
+	transition t1 {
+		from MoveToSection
+		to MoveToSection
+	trigger
+		
+		repeat_move_to_section ? validate_database_b
+		condition validate_database_b == false /\ attempts < limit_attempts
+		action attempts = attempts + 1
+	}
+	transition t2 {
+		from MoveToSection
+		to Fail
+	trigger
+		fail_move_to_section
+		condition validate_database_b == false /\ attempts >= limit_attempts
+	}
+	transition t3 {
+		from MoveToSection
+		to FindMarker
+	trigger
+		move_to_section ? validate_database_b
+		condition validate_database_b == true /\ attempts < limit_attempts
+		action attempts = 0
+	}
+	transition t4 {
+		from FindMarker
+		to FindMarker
+	trigger
+		
+		repeat_find_marker ? found_marker
+		condition found_marker == false /\ attempts < limit_attempts
+		action attempts = attempts + 1
+	}
+	transition t5 {
+		from FindMarker
+		to Fail
+	trigger
+		fail_find_marker
+		condition attempts >= limit_attempts
+	}
+	transition t6 {
+		from FindMarker
+		to MoveToPosRef
+	trigger
+		find_marker ? found_marker
+		condition found_marker == true /\ attempts < limit_attempts
+		action attempts = 0
+	}
+	transition t8 {
+		from MoveToPosRef
+		to MoveToPosRef
+	trigger
+		
+		
+		repeat_move_to_pos_ref ? validate_operation
+		condition validate_operation == false /\ attempts < limit_attempts
+		action attempts = attempts + 1
+	}
+	transition t9 {
+		from MoveToPosRef
+		to ConfirmMarker
+	trigger
+		
+		move_to_pos_ref ? validate_operation
+		condition validate_operation == true /\ attempts < limit_attempts
+		action attempts = 0
+	}
+	transition t10 {
+		from ConfirmMarker
+		to ConfirmMarker
+	trigger
+		
+		repeat_confirm_marker ? confirmed_marker
+		condition confirmed_marker == false /\ attempts < limit_attempts
+		action attempts = attempts + 1
+	}
+	transition t11 {
+		from ConfirmMarker
+		to Fail
+	trigger
+		fail_confirm_marker
+		condition attempts >= limit_attempts
+	}
+	transition t12 {
+		from ConfirmMarker
+		to Finish
+	trigger
+		confirm_marker ? confirmed_marker
+		condition confirmed_marker == true /\ attempts < limit_attempts
+	}
+	transition t7 {
+		from MoveToPosRef
+		to Fail
+		trigger fail_move_to_pos_ref
+		condition attempts >= limit_attempts
+	}
+const limit_attempts : int = 2
+	
+	var attempts : nat
+	var validate_operation : boolean
+	var found_marker : boolean
+	var confirmed_marker : boolean
+	var validate_database_b : boolean
+transition t13 {
+		from Fail
+		to Finish
+		trigger finish_with_fail
+	}
+}
+

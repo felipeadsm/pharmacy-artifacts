@@ -1,0 +1,33 @@
+package definitions
+
+
+interface KinovaGen3LiteArmControl {
+	move_to_pose ( )
+	check_movement ( )
+}
+
+interface LocationMedicineEvents {	
+	event fail_move_to_section
+	event move_to_section: boolean
+	event repeat_move_to_section: boolean
+	
+	event fail_find_marker
+	event find_marker: boolean
+	event repeat_find_marker: boolean
+	
+	event fail_move_to_pos_ref
+	event move_to_pos_ref: boolean
+	event repeat_move_to_pos_ref: boolean
+	
+	event fail_confirm_marker
+	event confirm_marker: boolean
+	event repeat_confirm_marker: boolean
+	
+	event finish_with_fail
+	
+}
+
+interface StopEvents {
+	event emergency_stop
+}
+

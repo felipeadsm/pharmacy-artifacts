@@ -1,0 +1,15 @@
+untimed assertion A1 : location_medicine::LocationMedicineFSM is deterministic
+untimed assertion A2 : location_medicine::LocationMedicineFSM is divergence-free
+untimed assertion A3 : location_medicine::LocationMedicineFSM is deadlock-free
+untimed assertion T1 : location_medicine::LocationMedicineFSM terminates
+
+
+csp target_refine associated to location_medicine::LocationMedicineFSM csp-begin
+channel accept
+
+target_process = location_medicine::LocationMedicineFSM::VS__(0, 2)
+target_refine = target_process ; accept -> STOP
+csp-end
+
+
+untimed assertion R1: target_refine refines location_medicine::LocationMedicineFSM

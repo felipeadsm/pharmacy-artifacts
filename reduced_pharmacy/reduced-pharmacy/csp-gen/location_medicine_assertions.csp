@@ -1,0 +1,104 @@
+
+--
+-- RoboChart generator version 3.0.0.202408051513
+-- Automatically generated on 14-01-2025 12:02:36
+--
+-- Iterated compression status: true
+-- Assertions compression status: false
+--
+
+
+	include "defs/function_toolkit_defs.csp"
+	include "defs/robochart_defs.csp"
+	include "defs/state_defs.csp"
+	include "defs/core_defs.csp"
+	include "defs/definitions_defs.csp"
+	include "defs/sequence_toolkit_defs.csp"
+	include "defs/set_toolkit_defs.csp"
+	include "instantiations.csp"
+	include "defs/location_medicine.csp"
+	include "defs/relation_toolkit_defs.csp"
+	include "defs/location_medicine_defs.csp"
+	
+	channel r__
+	
+	channel accept
+	
+	target_process = location_medicine::LocationMedicineFSM::VS_O__(0, 2)
+	target_refine = target_process ; accept -> STOP
+	
+	-- A1 - deterministic
+	assert let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) :[deterministic]
+	
+	-- A2 - divergence free
+	assert let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) :[divergence free]
+	
+	-- A3 - deadlock free
+	assert let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) :[deadlock free]
+	
+	-- T1 - terminating
+	assert not let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) :[deadlock free]
+	assert let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts); RUN({r__}) :[deadlock free]
+	
+	-- R1 - refinement
+	assert let 
+		id__ = 0
+		
+		
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+		
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) [FD= target_refine
+
+
+	-- R2 - refinement
+	assert let
+		id__ = 0
+
+
+		const_location_medicine_LocationMedicineFSM_limit_attempts = 2
+
+	within
+		location_medicine::LocationMedicineFSM::VS__(id__,
+				    const_location_medicine_LocationMedicineFSM_limit_attempts) [T= target_process
